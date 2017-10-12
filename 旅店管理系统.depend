@@ -1,0 +1,15 @@
+# depslib dependency file v1.0
+1507787381 source:c:\users\administrator\desktop\旅店管理系统\front\front.c
+
+1507789022 source:c:\users\administrator\desktop\旅店管理系统\main.c
+	<stdio.h>
+	<stdlib.h>
+	"./User/User.h"
+	"./Front/Front.h"
+
+1507789005 c:\users\administrator\desktop\旅店管理系统\user\user.h
+
+1507787297 c:\users\administrator\desktop\旅店管理系统\front\front.h
+
+1507787435 source:c:\users\administrator\desktop\旅店管理系统\user\user.c
+
