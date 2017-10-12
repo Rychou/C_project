@@ -14,12 +14,12 @@ int main()
         printf(" ‰»Î¥ÌŒÛ£¨«Î÷ÿ ‰£∫");
         scanf("%d",&i);
     }
-    /*switch(i)
+    switch(i)
     {
-        case 2: getPassword();break;
+     //   case 2: getPassword();break;
         case 1: index2();break;
-    }*/
-    printf("%d",i);
+    }
+
     return 0;
 }
 

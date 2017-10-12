@@ -13,3 +13,17 @@
 
 1507787435 source:c:\users\administrator\desktop\旅店管理系统\user\user.c
 
+1507787381 source:c:\代码\c\c_project\front\front.c
+
+1507790872 source:c:\代码\c\c_project\main.c
+	<stdio.h>
+	<stdlib.h>
+	"./User/User.h"
+	"./Front/Front.h"
+
+1507790597 c:\代码\c\c_project\user\user.h
+
+1507787297 c:\代码\c\c_project\front\front.h
+
+1507787435 source:c:\代码\c\c_project\user\user.c
+
