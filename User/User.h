@@ -6,3 +6,4 @@
 #endif // USER_H_INCLUDED
 
 void index2();
+void readRoom();
