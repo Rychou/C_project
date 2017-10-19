@@ -27,3 +27,19 @@
 
 1507787435 source:c:\代码\c\c_project\user\user.c
 
+1507986749 source:h:\c语言\旅店管理系统\front\front.c
+
+1507986749 source:h:\c语言\旅店管理系统\user\user.c
+	<stdio.h>
+	<windows.h>
+
+1508393253 source:h:\c语言\旅店管理系统\main.c
+	<stdio.h>
+	<stdlib.h>
+	"./User/User.h"
+	"./Front/Front.h"
+
+1507986749 h:\c语言\旅店管理系统\user\user.h
+
+1507986749 h:\c语言\旅店管理系统\front\front.h
+
