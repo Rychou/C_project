@@ -7,10 +7,9 @@
 int main()
 {
     void index();
-    void readRoom();
+    index();
     readRoom();
     int i;
-    index();
     scanf("%d",&i);
     while(i!=1&&i!=2)
     {
@@ -22,7 +21,7 @@ int main()
      //   case 2: getPassword();break;
         case 1: index2();break;
     }
-
+    writeGuest();
     return 0;
 }
 
