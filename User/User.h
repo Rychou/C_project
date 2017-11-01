@@ -12,3 +12,5 @@ void getGNum();
 void inputMsg();
 void readRoom();
 void writeGuest();
+void changeRStatusTo_0();
+void changeRStatusTo_1();

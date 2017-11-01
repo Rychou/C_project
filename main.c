@@ -19,7 +19,7 @@ int main()
     switch(i)
     {
      //   case 2: getPassword();break;
-        case 1: index2();break;
+        case 1: User();break;
     }
     writeGuest();
     return 0;
