@@ -31,9 +31,9 @@
 	<windows.h>
 	"../struct/struct.h"
 
-1507986749 source:h:\c语言\旅店管理系统\front\front.c
+1509600566 source:h:\c语言\旅店管理系统\front\front.c
 
-1509596966 source:h:\c语言\旅店管理系统\user\user.c
+1509599756 source:h:\c语言\旅店管理系统\user\user.c
 	<stdio.h>
 	<windows.h>
 	"../struct/struct.h"
@@ -45,19 +45,19 @@
 	"./User/User.h"
 	"./struct/struct.h"
 
-1509594136 h:\c语言\旅店管理系统\user\user.h
+1509599756 h:\c语言\旅店管理系统\user\user.h
 	"../struct/struct.h"
 
 1507986749 h:\c语言\旅店管理系统\front\front.h
 
 1509516632 c:\代码\c\c_project\struct\struct.h
 
-1509595000 h:\c语言\旅店管理系统\struct\struct.h
+1509599756 h:\c语言\旅店管理系统\struct\struct.h
 
-1509590318 source:h:\c语言\旅店管理系统\user\time.c
+1509599756 source:h:\c语言\旅店管理系统\user\time.c
 	<time.h>
 	"User.h"
 	"../struct/struct.h"
 
-1509589801 h:\c语言\旅店管理系统\user\time.h
+1509599756 h:\c语言\旅店管理系统\user\time.h
 

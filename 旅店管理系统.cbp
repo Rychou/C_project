@@ -35,6 +35,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="User/User.h" />
+		<Unit filename="User/time.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="User/time.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
