@@ -31,7 +31,6 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="Front.h" />
 		<Unit filename="Front/Front.c">
 			<Option compilerVar="CC" />
 		</Unit>

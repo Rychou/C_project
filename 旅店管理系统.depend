@@ -31,25 +31,26 @@
 	<windows.h>
 	"../struct/struct.h"
 
-1509600707 source:h:\c语言\旅店管理系统\front\front.c
+1509623291 source:h:\c语言\旅店管理系统\front\front.c
 
-1509602866 source:h:\c语言\旅店管理系统\user\user.c
+1509623181 source:h:\c语言\旅店管理系统\user\user.c
 	<stdio.h>
 	<windows.h>
 	"../struct/struct.h"
 	"time.h"
 
-1509600707 source:h:\c语言\旅店管理系统\main.c
+1509623257 source:h:\c语言\旅店管理系统\main.c
 	<stdio.h>
 	<stdlib.h>
+	<windows.h>
 	"./User/User.h"
 	"./Front/Front.h"
 	"./struct/struct.h"
 
-1509600707 h:\c语言\旅店管理系统\user\user.h
+1509606702 h:\c语言\旅店管理系统\user\user.h
 	"../struct/struct.h"
 
-1509600362 h:\c语言\旅店管理系统\front\front.h
+1509622920 h:\c语言\旅店管理系统\front\front.h
 
 1509516632 c:\代码\c\c_project\struct\struct.h
 

@@ -50,10 +50,12 @@ void Reserve(){//输出预约界面
         printf("输入错误，请重输：");
         scanf("%d",&k);
     }
-    isLeft(k);
-    getRNum();
-    getGNum();
-    inputMsg();
+    if(isLeft(k)!=0){
+        getRNum();
+        getGNum();
+        inputMsg();
+    }
+
 }
 
 void cancelReservation(){//输出取消预约界面
@@ -88,59 +90,81 @@ void cancelReservation(){//输出取消预约界面
     scanf("%s",ID);
     int i;
     printf("验证中......\n");
+    int t=1000;
     for(i=0;i<aLength;i++){
-            if(strcmp(ID,gst1[i].ID)==0){
+            if(strcmp(ID,gst1[i].ID)==0&&gst1[i].num==r&&count!=0){
                 changeRStatusTo_0(r);
                 deleteGuest(gst2,length);
                 count--;
                 if(count==0){
-                    printf("退房成功！欢迎再次光临!\n");
+                    printf("取消预订成功！欢迎再次光临!\n");
+                    t = -1;
+                    break;
                 }
             }
     }
+    if(t == 1000)
+        printf("取消预订失败!\n");
 }
 
-void isLeft(int i){//查询某种房型房间余量，输出用户可预定房号
+int isLeft(int i){//查询某种房型房间余量，输出用户可预定房号
     int k;
     int j = 0;
     switch(i){
     case 1:
-        printf("您选择的房型为单人房,以下房间可预订\n");
         for(k=0;k<3;k++)
             if(room[k].roomStatus==0){
-                printf("%d ",room[k].num);
-                emptyRoom[j]= room[k].num;
-                j++;
+                    emptyRoom[j]= room[k].num;
+                    j++;
             }
-
-        printf("\n");
+        if(j!=0){
+            printf("您选择的房型为单人房,以下房间可预订\n");
+            int z;
+            for(z=0;z<j;z++)
+                printf("%d ",emptyRoom[z]);
+                printf("\n");
+        }else {
+            printf("单人房已满！\n");
+        }
         break;
     case 2:
-        printf("您选择的房型为双人房,以下房间可预订:\n");
         for(k=3;k<6;k++)
             if(room[k].roomStatus==0){
-                printf("%d ",room[k].num);
-                emptyRoom[j]=room[k].num;
-                j++;
+                    emptyRoom[j]= room[k].num;
+                    j++;
             }
-
-        printf("\n");
+        if(j!=0){
+            printf("您选择的房型为双人房,以下房间可预订\n");
+            int z;
+            for(z=0;z<j;z++)
+                printf("%d ",emptyRoom[z]);
+                printf("\n");
+        }else {
+            printf("双人房已满！\n");
+        }
         break;
     case 3:
-        printf("您选择的房型为VIP房,以下房间可预订\n");
         for(k=6;k<9;k++)
             if(room[k].roomStatus==0){
-                printf("%d ",room[k].num);
-                emptyRoom[j]=room[k].num;
-                j++;
+                    emptyRoom[j]= room[k].num;
+                    j++;
             }
-
-        printf("\n");
+        if(j!=0){
+            printf("您选择的房型为VIP房,以下房间可预订\n");
+            int z;
+            for(z=0;z<j;z++)
+                printf("%d ",emptyRoom[z]);
+                printf("\n");
+        }else {
+            printf("VIP房已满！\n");
+        }
         break;
     }
+    int t = j;
     for(;j<3;j++){
         emptyRoom[j]=0;
     }
+    return t;
 }
 
 void getRNum(){//在isLeft（）打印出可预定房号后 获取用户指令
@@ -172,24 +196,24 @@ void inputMsg(){//输入入住客户的信息，可以多个客户
     char name[30];//名字
     int phone;//电话
     int k;
-    printf("年份：");
+    printf("预约年份：");
     scanf("%d",&pre.year);
-    printf("月份：");
+    printf("预约月份：");
     scanf("%d",&pre.month);
-    printf("日：");
+    printf("预约日：");
     scanf("%d",&pre.day);
     //判断预约日期是否满足要求
     while(1){
         if(judgeDate()==1) break;
         printf("预约时间不正确，请重新输入\n");
-        printf("年份：");
+        printf("预约年份：");
         scanf("%d",&pre.year);
-        printf("月份：");
+        printf("预约月份：");
         scanf("%d",&pre.month);
-        printf("日：");
+        printf("预约日：");
         scanf("%d",&pre.day);
     }
-    printf("预订天数:");
+    printf("预订天数：");
     scanf("%d",&Day);
     for(k=0;k<gNum;k++){
         guest[k].num = rNum;
@@ -216,8 +240,9 @@ void inputMsg(){//输入入住客户的信息，可以多个客户
         guest[k].time = pre;
         guest[k].day = Day;
     }
-    printf("预定成功，您预定的房号为:%d",rNum);
+    printf("预定成功，您预定的房号为:%d\n",rNum);
     changeRStatusTo_1();
+    writeGuest();
 }
 
 void readRoom(){ //读取房间文件
@@ -293,7 +318,7 @@ void deleteGuest(Guest gst2[],int length){//用户取消预定删除特定用户信息
     }
     int i;
     for(i=0;i<length;i++){
-        fprintf(fp,"%s %s %d %d \r\n",gst2[i].ID,gst2[i].name,gst2[i].phone,gst2[i].num);
+        fprintf(fp,"%s %s %d %d %d %d %d %d \r\n",gst2[i].ID,gst2[i].name,gst2[i].phone,gst2[i].num,gst2[i].time.year,gst2[i].time.month,gst2[i].time.day,gst2[i].day);
     }
     fclose(fp);
 }

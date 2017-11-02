@@ -1,37 +1,52 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <windows.h>
 #include "./User/User.h"
 #include "./Front/Front.h"
 #include "./struct/struct.h"
 
+
 int main()
 {
     void index();
+    int i=0;
     index();
-    readRoom();
-    int i;
-    scanf("%d",&i);
-    while(i!=1&&i!=2)
-    {
-        printf("输入错误，请重输：");
-        scanf("%d",&i);
+    while((i=getch())!= 0x1B){
+        readRoom();
+        switch(i)
+        {
+            case 50: getPassword();
+                     pause();
+                     index();
+                     continue;
+            case 49: User();
+                     pause();
+                     index();
+                     continue;
+            default:continue;
+        }
     }
-    switch(i)
-    {
-     //   case 2: getPassword();break;
-        case 1: User();break;
-    }
-    writeGuest();
     return 0;
 }
 
 void index()
 {
-    printf("=======================================\n");
-    printf("1.客户\n");
+    system("cls");
+    printf("\n--------------旅店管理系统--------------\n");
+    printf("               按ESC退出\n");
+    printf("========================================\n");
+    printf("1.客户\n\n");
     printf("2.前台\n");
-    printf("=======================================\n");
+    printf("========================================\n");
     printf("请选择：");
 }
 
+void pause()//实现暂停
+{
+    printf("按ESC返回首页..");
+    while(1){
+        if(getch()== 0x1B)
+            break;
+    }
+}
 
