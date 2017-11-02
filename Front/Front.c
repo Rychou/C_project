@@ -1,67 +1,42 @@
-#define PWDLEN 20
-void getpwd(char *pwd, int pwdlen);
-int comparePwd(char *pwd);
-void front_index();
+#include "time.h"
+#include <stdio.h>
+#include <windows.h>
+#include  <assert.h>
+#include <stdlib.h>
+#include "../struct/struct.h"
 
-void getPassword()
-{
+int front(){
     system("cls");
-    char pwd[20];
-    int count = 3;
-    printf("请输入登录密码：\n");
-    getpwd(pwd, PWDLEN);
-    while(comparePwd(pwd) != 1 && count > 0)
+    printf("=======================================\n");
+    printf("1.XXXXXX\n");
+    printf("2.查询所有房客信息\n");
+    printf("=======================================\n");
+    int i;
+    printf("请选择::");
+    scanf("%d",&i);
+    while(i!=1&&i!=2)
     {
-        printf("密码错误，请输入：\n");
-        getpwd(pwd, PWDLEN);
-        -- count;
+        printf("输入错误，请重输:");
+        scanf("%d",&i);
     }
-    if(comparePwd(pwd) == 1)
-    {
-        front_index();
+    switch(i){
+        case 1 : Reserve();break;
+        case 2 : SreachRoomMsg();break;
     }
+    return 0;
 }
 
-void front_index()
-{
-    printf("@@@@@@@@@@@@@@@登陆成功!@@@@@@@@@@@@@@@@@@\n");
+int SreachRoomMsg(){
+     system("cls");
+     FILE *r = fopen("f:\\c\\C_project-wangjintao\\data\\User.txt","r");
+     assert(r!=NULL);
+     char g[100];
+     int i;
+     int count=0;
+     while(fgets(g,100,r)!=NULL){
+        printf("%s\n",g);
+     }
+     fclose(r);
+     return 0;
 }
 
-int comparePwd(char *pwd)
-{
-    int i = 0;
-    char passWd[6] ={'1','2','3','4','5','6'};
-    for(;i < 6; i++)
-    {
-        if(*(pwd+i) != passWd[i])
-            return -1;
-    }
-    return 1;
-}
-
-/**
-* 获取用户输入的密码
-* @param  pwd     char*  保存密码的内存的首地址
-* @param  pwdlen  int    密码的最大长度
-**/
-void getpwd(char *pwd, int pwdlen){
-    char ch = 0;
-    int i = 0;
-    while(i<pwdlen){
-        ch = getch();
-        if(ch == '\r'){  //回车结束输入
-            printf("\n");
-            break;
-        }
-
-        if(ch=='\b' && i>0){  //按下删除键
-            i--;
-            printf("\b \b");
-        }else if(isprint(ch)){  //输入可打印字符
-            pwd[i] = ch;
-            printf("*");
-            i++;
-        }
-    }
-    pwd[i] = '\0';
-}
