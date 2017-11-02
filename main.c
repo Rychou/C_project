@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "./User/User.h"
-#include "./Front/Front.h"
+//#include "./Front/Front.h"
 #include "./struct/struct.h"
 
 int main()
