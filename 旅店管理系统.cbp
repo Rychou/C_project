@@ -31,10 +31,19 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="Front.h" />
+		<Unit filename="Front/Front.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Front/Front.h" />
 		<Unit filename="User/User.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="User/User.h" />
+		<Unit filename="User/time.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="User/time.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
