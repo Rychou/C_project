@@ -87,12 +87,15 @@ void cancelReservation(){//输出取消预约界面
     printf("请输入身份证号进行验证：");
     scanf("%s",ID);
     int i;
+    printf("验证中......\n");
     for(i=0;i<aLength;i++){
             if(strcmp(ID,gst1[i].ID)==0){
-                printf("验证成功,正在退房......\n");
                 changeRStatusTo_0(r);
                 deleteGuest(gst2,length);
-                printf("退房成功！欢迎再次光临!");
+                count--;
+                if(count==0){
+                    printf("退房成功！欢迎再次光临!\n");
+                }
             }
     }
 }
@@ -169,6 +172,25 @@ void inputMsg(){//输入入住客户的信息，可以多个客户
     char name[30];//名字
     int phone;//电话
     int k;
+    printf("年份：");
+    scanf("%d",&pre.year);
+    printf("月份：");
+    scanf("%d",&pre.month);
+    printf("日：");
+    scanf("%d",&pre.day);
+    //判断预约日期是否满足要求
+    while(1){
+        if(judgeDate()==1) break;
+        printf("预约时间不正确，请重新输入\n");
+        printf("年份：");
+        scanf("%d",&pre.year);
+        printf("月份：");
+        scanf("%d",&pre.month);
+        printf("日：");
+        scanf("%d",&pre.day);
+    }
+    printf("预订天数:");
+    scanf("%d",&Day);
     for(k=0;k<gNum;k++){
         guest[k].num = rNum;
         printf("请输入第%d个客人的信息\n",k+1);
@@ -191,26 +213,7 @@ void inputMsg(){//输入入住客户的信息，可以多个客户
         printf("电话号：");
         scanf("%d",&phone);
         guest[k].phone = phone;
-        printf("年份：");
-        scanf("%d",&pre.year);
-        printf("月份：");
-        scanf("%d",&pre.month);
-        printf("日：");
-        scanf("%d",&pre.day);
-        //判断预约日期是否满足要求
-        while(1){
-            if(judgeDate()==1) break;
-            printf("预约时间不正确，请重新输入\n");
-            printf("年份：");
-            scanf("%d",&pre.year);
-            printf("月份：");
-            scanf("%d",&pre.month);
-            printf("日：");
-            scanf("%d",&pre.day);
-        }
         guest[k].time = pre;
-        printf("预订天数:");
-        scanf("%d",&Day);
         guest[k].day = Day;
     }
     printf("预定成功，您预定的房号为:%d",rNum);
