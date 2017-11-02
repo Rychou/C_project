@@ -6,4 +6,11 @@
 #endif // USER_H_INCLUDED
 
 void index2();
+void isLeft();
+void getRNum();
+void getGNum();
+void inputMsg();
 void readRoom();
+void writeGuest();
+void changeRStatusTo_0();
+void changeRStatusTo_1();

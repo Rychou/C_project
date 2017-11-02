@@ -15,18 +15,18 @@
 
 1507787381 source:c:\代码\c\c_project\front\front.c
 
-1508397501 source:c:\代码\c\c_project\main.c
+1509522389 source:c:\代码\c\c_project\main.c
 	<stdio.h>
 	<stdlib.h>
 	"./User/User.h"
 	"./Front/Front.h"
 	"./struct/struct.h"
 
-1508397249 c:\代码\c\c_project\user\user.h
+1509538497 c:\代码\c\c_project\user\user.h
 
 1508395364 c:\代码\c\c_project\front\front.h
 
-1508397834 source:c:\代码\c\c_project\user\user.c
+1509549291 source:c:\代码\c\c_project\user\user.c
 	<stdio.h>
 	<windows.h>
 	"../struct/struct.h"
@@ -47,5 +47,5 @@
 
 1507986749 h:\c语言\旅店管理系统\front\front.h
 
-1508397483 c:\代码\c\c_project\struct\struct.h
+1509516632 c:\代码\c\c_project\struct\struct.h
 

@@ -15,18 +15,19 @@ typedef struct{
     int day;
 }Date;
 
-typedef struct {
+/*typedef struct {
     int num;//房间号
     char ID[18];//身份证
     Date time;//入住时间
     int day;//入住天数
     int status;//1为已入住；2为预约
 }RG;
-
+*/
 typedef struct {
-    char ID[18];//身份证
-    char name[10];//名字
+    char ID[20];//身份证
+    char name[30];//名字
     int phone;//电话
+    int num;//入住房号
 }Guest;
 
 #endif // STRUCT_H_INCLUDED
