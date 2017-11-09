@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <windows.h>
 #include <ctype.h>
+#include <string.h>
 #include "../struct/struct.h"
 #include "../User/User.h"
 #include "../User/time.h"
@@ -15,8 +16,13 @@ extern Date now;
 extern void pause();
 
 
-void getPassword()
-{
+/**
+* 获取用户输入的密码
+* @param  pwd     char*  保存密码的内存的首地址
+* @param  pwdlen  int    密码的最大长度
+**/
+
+void getPassword(){//密码输入界面
     system("cls");
     char pwd[20];
     int count = 3;
@@ -34,11 +40,51 @@ void getPassword()
     }
 }
 
-void front(){
+void getpwd(char *pwd, int pwdlen){//得到密码
+    char ch = 0;
+    int i = 0;
+    while(i<pwdlen){
+        ch = getch();
+        if(ch == '\r'){  //回车结束输入
+            printf("\n");
+            break;
+        }
+
+        if(ch=='\b' && i>0){  //按下删除键
+            i--;
+            printf("\b \b");
+        }else if(isprint(ch)){  //输入可打印字符
+            pwd[i] = ch;
+            printf("*");
+            i++;
+        }
+    }
+    pwd[i] = '\0';
+}
+
+int comparePwd(char *pwd){//验证密码
+    int i = 0;
+    if(strlen(pwd)!=6){
+        return -1;
+    }
+    char passWd[6] ={'1','2','3','4','5','6'};
+    for(;i < 6; i++)
+    {
+        if(*(pwd+i) != passWd[i])
+            return -1;
+    }
+    return 1;
+}
+
+
+
+void front(){//前台功能函数
     front_index();
     int i = 0;
      while((i=getch())!= 0x1B)
     {
+        readGuest();
+        readRoom();
         switch(i)
         {
             case 49:
@@ -63,8 +109,8 @@ void front(){
         }
     }
 }
-void front_index()
-{
+
+void front_index(){//打印前台功能页面
     system("cls");
     printf("\n");
     printf(" @@@@@@@@@@@@@@前台@@@@@@@@@@@@@@@@@\n");
@@ -77,8 +123,10 @@ void front_index()
     printf("请输入指令：");
 }
 
-void checkIn()
-{
+
+
+void checkIn(){//入住功能函数
+
     system("cls");
     printf(" @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n");
     printf("@1.预定入住                         @\n");
@@ -109,72 +157,8 @@ void checkIn()
     }
 }
 
-void checkOut()
-{
-    system("cls");
-        char ID[20];//用户身份证号，用于验证用户信息，避免退别人房间的情况
-    Guest gst2[56];//gst1[]用来读入User.txt数据，gst2[]用来储存gst1[]中去掉取消预定的用户信息的信息
-    int r;//房间号
-    int b = 0;
-    printf("请输入您要退的房间号：");
-    scanf("%d",&r);
-    while(r!=101&&r!=102&&r!=103&&r!=201&&r!=202&&r!=203&&r!=301&&r!=302&&r!=303){
-        printf("输入错误，请重新输入:");
-        scanf("%d",&r);
-    }
-    printf("请输入身份证号进行验证：");
-    scanf("%s",ID);
-    /*复制用户结构数组再从新写入文件 实现退订删除用户数据功能*/
-    int count=0;//记录预订同一房间的人数
-    int k;
-    Guest temp;
-    for(k=0;k<aLength;k++){
-        if(strcmp(ID,allGuest[k].ID)==0&&allGuest[k].num==r&&allGuest[k].status==1){
-            temp = allGuest[k];
-            b = 1;
-            break;
-        }
-    }
-    int c = 0;//统计订了这间房的人数
-    if(b){
-        int j = 0;
-        k = 0;
-        while(k<aLength&&j<aLength){
-            if(allGuest[k].num ==r){
-                c++;
-                if(allGuest[k].time.year == temp.time.year&&allGuest[k].time.month == temp.time.month&&allGuest[k].time.day == temp.time.day&&allGuest[k].status==1){
-                    k++;
-                    count++;
-                    continue;
-                }
+int checkReserve(){//预约变入住功能
 
-            }
-            gst2[j]=allGuest[k];
-            j++;
-            k++;
-        }
-
-        int length = aLength-count;
-        if(c==count){
-            changeRStatusTo_0(r);
-        }
-        deleteGuest(gst2,length);
-        printf("验证中......");
-        Sleep(3000);
-        printf("\n");
-        printf("应付%d元！\n",count_money(temp.day,temp.num));
-        printf("退房成功！欢迎再次光临!\n");
-    }else {
-        printf("验证中......");
-        Sleep(3000);
-        printf("\n");
-        printf("退房失败!\n");
-    }
-    readGuest();
-}
-
-int checkReserve()
-{
     int check = -1;
     char ID[20];
     int r;
@@ -217,48 +201,7 @@ int checkReserve()
     return check;
 }
 
-
-
-int comparePwd(char *pwd)
-{
-    int i = 0;
-    char passWd[6] ={'1','2','3','4','5','6'};
-    for(;i < 6; i++)
-    {
-        if(*(pwd+i) != passWd[i])
-            return -1;
-    }
-    return 1;
-}
-
-/**
-* 获取用户输入的密码
-* @param  pwd     char*  保存密码的内存的首地址
-* @param  pwdlen  int    密码的最大长度
-**/
-void getpwd(char *pwd, int pwdlen){
-    char ch = 0;
-    int i = 0;
-    while(i<pwdlen){
-        ch = getch();
-        if(ch == '\r'){  //回车结束输入
-            printf("\n");
-            break;
-        }
-
-        if(ch=='\b' && i>0){  //按下删除键
-            i--;
-            printf("\b \b");
-        }else if(isprint(ch)){  //输入可打印字符
-            pwd[i] = ch;
-            printf("*");
-            i++;
-        }
-    }
-    pwd[i] = '\0';
-}
-
-void changeGStatusTo_1(int i){
+void changeGStatusTo_1(int i){//更改客人的status，由预约到入住
     Guest g = allGuest[i];
     int j = 0;
     for(;j<aLength;j++){
@@ -269,7 +212,7 @@ void changeGStatusTo_1(int i){
     writeAllGuest();
 }
 
-void writeAllGuest(){//重新写入客户信息
+void writeAllGuest(){//重新写入全部客户信息
     FILE *fp;
     if((fp=fopen("data/User.txt","w"))==NULL){
         printf("无法读取文件");
@@ -359,7 +302,7 @@ int front_isLeft(int i){//查询某种房型房间余量，输出可选择房号
     return t;
 }
 
-int front_judgeOrder(int k){//判断房间可不可以预约
+int front_judgeOrder(int k){//判断房间可不可以入住
     int i;
     for(i = 0;i < 56;i++){
         if(allGuest[i].num == room[k].num){
@@ -369,6 +312,71 @@ int front_judgeOrder(int k){//判断房间可不可以预约
         }
     }
     return 1;
+}
+
+
+
+void checkOut(){//退房功能函数
+    system("cls");
+        char ID[20];//用户身份证号，用于验证用户信息，避免退别人房间的情况
+    Guest gst2[56];//gst1[]用来读入User.txt数据，gst2[]用来储存gst1[]中去掉取消预定的用户信息的信息
+    int r;//房间号
+    int b = 0;
+    printf("请输入您要退的房间号：");
+    scanf("%d",&r);
+    while(r!=101&&r!=102&&r!=103&&r!=201&&r!=202&&r!=203&&r!=301&&r!=302&&r!=303){
+        printf("输入错误，请重新输入:");
+        scanf("%d",&r);
+    }
+    printf("请输入身份证号进行验证：");
+    scanf("%s",ID);
+    /*复制用户结构数组再从新写入文件 实现退订删除用户数据功能*/
+    int count=0;//记录预订同一房间的人数
+    int k;
+    Guest temp;
+    for(k=0;k<aLength;k++){
+        if(strcmp(ID,allGuest[k].ID)==0&&allGuest[k].num==r&&allGuest[k].status==1){
+            temp = allGuest[k];
+            b = 1;
+            break;
+        }
+    }
+    int c = 0;//统计订了这间房的人数
+    if(b){
+        int j = 0;
+        k = 0;
+        while(k<aLength&&j<aLength){
+            if(allGuest[k].num ==r){
+                c++;
+                if(allGuest[k].time.year == temp.time.year&&allGuest[k].time.month == temp.time.month&&allGuest[k].time.day == temp.time.day&&allGuest[k].status==1){
+                    k++;
+                    count++;
+                    continue;
+                }
+
+            }
+            gst2[j]=allGuest[k];
+            j++;
+            k++;
+        }
+
+        int length = aLength-count;
+        if(c==count){
+            changeRStatusTo_0(r);
+        }
+        deleteGuest(gst2,length);
+        printf("验证中......");
+        Sleep(3000);
+        printf("\n");
+        printf("应付%d元！\n",count_money(temp.day,temp.num));
+        printf("退房成功！欢迎再次光临!\n");
+    }else {
+        printf("验证中......");
+        Sleep(3000);
+        printf("\n");
+        printf("退房失败!\n");
+    }
+    readGuest();
 }
 
 int count_money(int day,int num){//计算钱数
@@ -387,6 +395,99 @@ int count_money(int day,int num){//计算钱数
     return money;
 }
 
-void search(){
+
+
+void search_index(){//打印查询功能界面
+    system("cls");
+    printf(" @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n");
+    printf("@                                   @\n");
+    printf("@1.查看所有房间信息                 @\n");
+    printf("@2.查看某房间客人信息               @\n");
+    printf("@                                   @\n");
+    printf(" @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n");
+    printf("请选择：");
+}
+
+void search(){//查询功能函数
+
+    search_index();
+    int i = 0;
+    while((i=getch())!= 0x1B){
+        now = getDt();
+        readRoom();
+        readGuest();
+        switch(i)
+        {
+            case 49: searchAllRoom();
+                     search_index();
+                     continue;
+            case 50: searchOneRoom();
+                     search_index();
+                     continue;
+        }
+    }
+}
+
+void searchAllRoom(){//查询所有房间
+    printf("\n");
+    int i =0;
+    for(;i<9;i++){
+        if(room[i].roomStatus==1){
+            printf("%d有以下时间已占用:",room[i].num);
+            int j = 0;
+            Date temp;
+            for(;j < aLength;j++){
+                if(allGuest[j].num == room[i].num){
+                    Date start = allGuest[j].time;
+                    if(start.year!=temp.year||start.month!=temp.month||start.day!=temp.day){
+                        Date last = getLastDt(start,allGuest[j].day);
+                        printf("%d/%d/%d-%d/%d/%d\t",start.year,start.month,start.day,last.year,last.month,last.day);
+                        temp = start;
+                    }
+                }
+            }
+            printf("\n");
+        }else {
+            printf("%d为空\n",room[i].num);
+        }
+    }
+}
+
+void searchOneRoom(){//查询一个房间具体信息
+    printf("\n");
+    int r;
+    printf("请输入房间号：");
+    scanf("%d",&r);
+    while(r!=101&&r!=102&&r!=103&&r!=201&&r!=202&&r!=203&&r!=301&&r!=302&&r!=303){
+        printf("输入错误，请重新输入:");
+        scanf("%d",&r);
+    }
+    printf("\n");
+    int j = 0;
+    Room temp;
+    for(;j<9;j++){
+        if(room[j].num==r){
+            temp = room[j];
+            break;
+        }
+    }
+    if(temp.roomStatus == 1){
+        int count = 0;
+        //printf("%d\n",count);
+        for(j = 0;j < aLength;j++){
+            if(allGuest[j].num == r){
+                count++;
+                printf("第%d个客人：\n",count);
+                printf("       身份证号码：%s\n",allGuest[j].ID);
+                printf("       姓名：%s\n",allGuest[j].name);
+                printf("       电话号码：%d\n",allGuest[j].phone);
+                printf("       订房时间：%d/%d/%d\n",allGuest[j].time.year,allGuest[j].time.month,allGuest[j].time.day);
+                printf("       订房天数：%d\n",allGuest[j].day);
+            }
+        }
+    }else {
+        printf("此房间为空房！\n");
+    }
+    printf("\n");
 
 }

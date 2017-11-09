@@ -7,7 +7,6 @@ Date getDt()//得到当前的年月日，调用ASII()函数，Calendar(),MonthIs()
     int y1,y2,y3,y4;//年份的四个数字
     int m1,m2;//月份的两个数字
     int d1,d2;//日期的两个数字
-    //int year,month,day;//年、月、日
     char Dt[9];
     time_t t = time(NULL);
     struct tm *ts = localtime(&t);
@@ -61,6 +60,7 @@ int MonthHas(int year,int month)//判断一个月有几天
 
 Date getLastDt(Date first,int day){//得到最后一天
     Date last = first;
+    day = day-1;
     int monthday = MonthHas(first.year,first.month);//这个月有几天
     if(first.day+day > monthday){
         if(first.month == 12){

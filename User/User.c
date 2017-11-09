@@ -16,14 +16,15 @@ int emptyRoom[3];
 
 void User(){//输出用户界面
     system("cls");
-    printf("=======================================\n");
-    printf("1.预定\n");
-    printf("2.取消预定\n");
-    printf("注：只接受7天内的预约\n");
-    printf("=======================================\n");
-    //printf("%d\n",aLength);
+    printf("\n");
+    printf(" @@@@@@@@@@@@@@用户@@@@@@@@@@@@@@@@@\n");
+    printf("@                                   @\n");
+    printf("@      1.预约                       @\n");
+    printf("@      2.取消预约                   @\n");
+    printf("@                                   @\n");
+    printf(" @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n");
+    printf("请输入指令：");
     int i;
-    printf("请选择:");
     scanf("%d",&i);
     while(i!=1&&i!=2)
     {
@@ -36,13 +37,18 @@ void User(){//输出用户界面
     }
 }
 
+
+
 void Reserve(){//输出预约界面
     system("cls");
-    printf("=======================================\n");
-    printf("1.单人间（68元/天）\n");
-    printf("2.双人间（168元/天）\n");
-    printf("3.VIP套房（268元/天）\n");
-    printf("=======================================\n");
+    printf("\n");
+    printf(" @@@@@@@@@@@@@@前台@@@@@@@@@@@@@@@@@\n");
+    printf("@                                   @\n");
+    printf("@      1.单人间（68元/天）          @\n");
+    printf("@      2.双人间（168元/天）         @\n");
+    printf("@      3.VIP套房（268元/天）        @\n");
+    printf("@                                   @\n");
+    printf(" @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n");
     printf("请输入您需要预定的房型:");
     int k;
     scanf("%d",&k);
@@ -57,98 +63,6 @@ void Reserve(){//输出预约界面
         inputMsg(pre,2);
     }
 
-}
-
-void cancelReservation(){//输出取消预约界面
-    char ID[20];//用户身份证号，用于验证用户信息，避免退别人房间的情况
-    Guest gst2[56];//gst1[]用来读入User.txt数据，gst2[]用来储存gst1[]中去掉取消预定的用户信息的信息
-    int r;//房间号
-    int b = 0;
-    //readGuest();
-    printf("请输入您要取消预定的房间号：");
-    scanf("%d",&r);
-    while(r!=101&&r!=102&&r!=103&&r!=201&&r!=202&&r!=203&&r!=301&&r!=302&&r!=303){
-        printf("输入错误，请重新输入:");
-        scanf("%d",&r);
-    }
-    printf("请输入身份证号进行验证：");
-    scanf("%s",ID);
-    /*复制用户结构数组再从新写入文件 实现退订删除用户数据功能*/
-    int count=0;//记录预订同一房间的人数
-    int k;
-    Guest temp;
-    for(k=0;k<aLength;k++){
-        if(strcmp(ID,allGuest[k].ID)==0&&allGuest[k].num==r&&allGuest[k].status==2){
-            temp = allGuest[k];
-            b = 1;
-            break;
-        }
-    }
-    int c = 0;//统计订了这间房的人数
-    if(b){
-        int j = 0;
-        k = 0;
-        while(k<aLength&&j<aLength){
-            if(allGuest[k].num ==r){
-                c++;
-                if(allGuest[k].time.year == temp.time.year&&allGuest[k].time.month == temp.time.month&&allGuest[k].time.day == temp.time.day&&allGuest[k].status==2){
-                    k++;
-                    count++;
-                    continue;
-                }
-
-            }
-            gst2[j]=allGuest[k];
-            j++;
-            k++;
-        }
-        /*for(k=0;k<aLength;k++){
-            if(allGuest[k].num ==r){
-                if(allGuest[k].time.year == temp.time.year&&allGuest[k].time.month == temp.time.month&&allGuest[k].time.day == temp.time.day&&allGuest[k].status==2){
-                    count++;
-                    continue;
-                }
-                c++;
-            }
-            gst2[]
-
-        }
-        int j;
-        for(j=0;j<aLength;j++){
-            /*if(allGuest[j].num!=r){
-                gst2[j] = allGuest[j];
-            }else if(bigger(allGuest[j].time,temp.time)||bigger(temp.time,allGuest[j].time)){
-                gst2[j] = allGuest[j];
-            }else {
-                gst2[j]=allGuest[j+count];
-            }
-            if(allGuest[j].num ==r&&allGuest[j].time.year == temp.time.year&&allGuest[j].time.month == temp.time.month&&allGuest[j].time.day == temp.time.day){
-                gst2[j]=allGuest[j+count];
-                j = j+count;
-            }else {
-                gst2[j] = allGuest[j];
-            }
-        }*/
-        //int length = aLength-count;//gst2[]数组的长度
-        //printf("%d\n",aLength);
-        //printf("%d\n",count);
-        int length = aLength-count;
-        //printf("%d\n",length);
-        if(c==count){
-            changeRStatusTo_0(r);
-        }
-        deleteGuest(gst2,length);
-        printf("验证中......");
-        Sleep(3000);
-        printf("\n");
-        printf("取消预订成功！欢迎再次光临!\n");
-    }else {
-        printf("验证中......");
-        Sleep(3000);
-        printf("\n");
-        printf("取消预订失败!\n");
-    }
-    readGuest();
 }
 
 int isLeft(int i){//查询某种房型房间余量，输出用户可预定房号
@@ -244,6 +158,70 @@ int isLeft(int i){//查询某种房型房间余量，输出用户可预定房号
     return t;
 }
 
+int judgeDate(){//判断日期是否满足要求
+    int monthday = MonthHas(now.year,now.day);//这个月有几天
+    if(now.day+7>monthday){
+        if(now.month == 12){
+            if(pre.year == now.year){
+                if(pre.month == now.month){
+                    if(pre.day >= now.day&&pre.day <= monthday)
+                        return 1;
+                }
+            }else if(pre.year == now.year+1){
+                    if(pre.month == 1){
+                        if(pre.day <= 7-(monthday-now.day))
+                            return 1;
+                    }
+                }
+        }else {
+            if(pre.year == now.year){
+                if(pre.month == now.month){
+                    if(pre.day >= now.day&&pre.day <= monthday)
+                        return 1;
+                }else if(pre.month == now.month+1){
+                    if(pre.day <= 7-(monthday-now.day))
+                        return 1;
+                }
+            }
+        }
+    }else {
+        if(pre.year == now.year){
+            if(pre.month == now.month){
+                if(pre.day >= now.day&&pre.day <= now.day+7)
+                    return 1;
+            }
+        }
+
+    }
+    return 0;
+}
+
+int judgeLast(Date dt,int d,int i){//判断时间有无空余
+    Date date = allGuest[i].time;
+    int day = allGuest[i].day;
+    Date last = getLastDt(date,day);
+    Date orderLast = getLastDt(dt,d);
+    if(bigger(dt,last)){
+        return 1;
+    }
+    if(bigger(date,orderLast)){
+        return 1;
+    }
+    return 0;
+}
+
+int judgeOrder(int k){//判断房间可不可以预约
+    int i;
+    for(i = 0;i < aLength;i++){
+        if(allGuest[i].num == room[k].num){
+            if(!judgeLast(pre,Day,i)){
+                return 0;
+            }
+        }
+    }
+    return 1;
+}
+
 void getRNum(){//在isLeft（）打印出可预定房号后 获取用户指令
     printf("请输入您要选择的房号:");
     scanf("%d",&rNum);
@@ -304,38 +282,6 @@ void inputMsg(Date date,int i){//输入入住客户的信息，可以多个客户
     writeGuest();
 }
 
-void readRoom(){ //读取房间文件
-    FILE *fp;
-    int i=0;
-    if((fp=fopen("data/Room.txt","rb"))==NULL){
-        printf("无法读取文件");
-        exit(0);
-    }
-    while(!feof(fp)&&i<9){
-        fscanf(fp,"%d%d%d%d",&room[i].num,&room[i].rank,&room[i].price,&room[i].roomStatus);
-        i++;
-    }
-    fclose(fp);
-}
-
-void readGuest(){//读取User.txt
-    FILE *fp;
-    int i=0;
-    aLength = 0;
-    if((fp=fopen("data/User.txt","rb"))==NULL){
-        printf("无法读取文件");
-        exit(0);
-    }
-    while(!feof(fp)&&i<56){
-        if(fscanf(fp,"%s%s%d%d%d%d%d%d%d",&allGuest[i].ID,&allGuest[i].name,&allGuest[i].phone,&allGuest[i].num,&allGuest[i].status,&allGuest[i].time.year,&allGuest[i].time.month,&allGuest[i].time.day,&allGuest[i].day)!=EOF){
-                aLength++;
-        }
-
-        i++;
-    }
-    fclose(fp);
-}
-
 void changeRStatusTo_1(){//改变房间状态为1
     int i;
     for(i=0;i<9;i++){
@@ -351,6 +297,81 @@ void changeRStatusTo_1(){//改变房间状态为1
         fprintf(fp1,"%d %d %d %d \r\n",room[i].num,room[i].rank,room[i].price,room[i].roomStatus);
     }
     fclose(fp1);
+}
+
+void writeGuest(){//追加写入客户信息
+    FILE *fp;
+    if((fp=fopen("data/User.txt","a"))==NULL){
+        printf("无法读取文件");
+        exit(0);
+    }
+    int i;
+    for(i=0;i<gNum;i++){
+        fprintf(fp,"%s %s %d %d %d %d %d %d %d \r\n",guest[i].ID,guest[i].name,guest[i].phone,guest[i].num,guest[i].status,guest[i].time.year,guest[i].time.month,guest[i].time.day,guest[i].day);
+    }
+    fclose(fp);
+}
+
+
+
+void cancelReservation(){//输出取消预约界面
+    char ID[20];//用户身份证号，用于验证用户信息，避免退别人房间的情况
+    Guest gst2[56];//gst1[]用来读入User.txt数据，gst2[]用来储存gst1[]中去掉取消预定的用户信息的信息
+    int r;//房间号
+    int b = 0;
+    printf("请输入您要取消预定的房间号：");
+    scanf("%d",&r);
+    while(r!=101&&r!=102&&r!=103&&r!=201&&r!=202&&r!=203&&r!=301&&r!=302&&r!=303){
+        printf("输入错误，请重新输入:");
+        scanf("%d",&r);
+    }
+    printf("请输入身份证号进行验证：");
+    scanf("%s",ID);
+    /*复制用户结构数组再从新写入文件 实现退订删除用户数据功能*/
+    int count=0;//记录预订同一房间的人数
+    int k;
+    Guest temp;
+    for(k=0;k<aLength;k++){
+        if(strcmp(ID,allGuest[k].ID)==0&&allGuest[k].num==r&&allGuest[k].status==2){
+            temp = allGuest[k];
+            b = 1;
+            break;
+        }
+    }
+    int c = 0;//统计订了这间房的人数
+    if(b){
+        int j = 0;
+        k = 0;
+        while(k<aLength&&j<aLength){
+            if(allGuest[k].num ==r){
+                c++;
+                if(allGuest[k].time.year == temp.time.year&&allGuest[k].time.month == temp.time.month&&allGuest[k].time.day == temp.time.day&&allGuest[k].status==2){
+                    k++;
+                    count++;
+                    continue;
+                }
+
+            }
+            gst2[j]=allGuest[k];
+            j++;
+            k++;
+        }
+        int length = aLength-count;//gst2[]数组的长度
+        if(c==count){
+            changeRStatusTo_0(r);
+        }
+        deleteGuest(gst2,length);
+        printf("验证中......");
+        Sleep(3000);
+        printf("\n");
+        printf("取消预订成功！欢迎再次光临!\n");
+    }else {
+        printf("验证中......");
+        Sleep(3000);
+        printf("\n");
+        printf("取消预订失败!\n");
+    }
+    readGuest();
 }
 
 void changeRStatusTo_0(int roomNum){//修改房间状态为0
@@ -384,81 +405,36 @@ void deleteGuest(Guest gst2[],int length){//用户取消预定删除特定用户信息
     fclose(fp);
 }
 
-void writeGuest(){//追加写入客户信息
+
+
+void readRoom(){ //读取房间文件
     FILE *fp;
-    if((fp=fopen("data/User.txt","a"))==NULL){
+    int i=0;
+    if((fp=fopen("data/Room.txt","rb"))==NULL){
         printf("无法读取文件");
         exit(0);
     }
-    int i;
-    for(i=0;i<gNum;i++){
-        fprintf(fp,"%s %s %d %d %d %d %d %d %d \r\n",guest[i].ID,guest[i].name,guest[i].phone,guest[i].num,guest[i].status,guest[i].time.year,guest[i].time.month,guest[i].time.day,guest[i].day);
+    while(!feof(fp)&&i<9){
+        fscanf(fp,"%d%d%d%d",&room[i].num,&room[i].rank,&room[i].price,&room[i].roomStatus);
+        i++;
     }
     fclose(fp);
 }
 
-int judgeDate(){//判断日期是否满足要求
-    int monthday = MonthHas(now.year,now.day);//这个月有几天
-    if(now.day+7>monthday){
-        if(now.month == 12){
-            if(pre.year == now.year){
-                if(pre.month == now.month){
-                    if(pre.day >= now.day&&pre.day <= monthday)
-                        return 1;
-                }
-            }else if(pre.year == now.year+1){
-                    if(pre.month == 1){
-                        if(pre.day <= 7-(monthday-now.day))
-                            return 1;
-                    }
-                }
-        }else {
-            if(pre.year == now.year){
-                if(pre.month == now.month){
-                    if(pre.day >= now.day&&pre.day <= monthday)
-                        return 1;
-                }else if(pre.month == now.month+1){
-                    if(pre.day <= 7-(monthday-now.day))
-                        return 1;
-                }
-            }
-        }
-    }else {
-        if(pre.year == now.year){
-            if(pre.month == now.month){
-                if(pre.day >= now.day&&pre.day <= now.day+7)
-                    return 1;
-            }
+void readGuest(){//读取User.txt
+    FILE *fp;
+    int i=0;
+    aLength = 0;
+    if((fp=fopen("data/User.txt","rb"))==NULL){
+        printf("无法读取文件");
+        exit(0);
+    }
+    while(!feof(fp)&&i<56){
+        if(fscanf(fp,"%s%s%d%d%d%d%d%d%d",&allGuest[i].ID,&allGuest[i].name,&allGuest[i].phone,&allGuest[i].num,&allGuest[i].status,&allGuest[i].time.year,&allGuest[i].time.month,&allGuest[i].time.day,&allGuest[i].day)!=EOF){
+                aLength++;
         }
 
+        i++;
     }
-    return 0;
+    fclose(fp);
 }
-
-int judgeLast(Date dt,int d,int i){//判断时间有无空余
-    Date date = allGuest[i].time;
-    int day = allGuest[i].day;
-    Date last = getLastDt(date,day-1);
-    Date orderLast = getLastDt(dt,d-1);
-    if(bigger(dt,last)){
-        return 1;
-    }
-    if(bigger(date,orderLast)){
-        return 1;
-    }
-    return 0;
-}
-
-int judgeOrder(int k){//判断房间可不可以预约
-    int i;
-    for(i = 0;i < aLength;i++){
-        if(allGuest[i].num == room[k].num){
-            if(!judgeLast(pre,Day,i)){
-                return 0;
-            }
-        }
-    }
-    return 1;
-}
-
-
