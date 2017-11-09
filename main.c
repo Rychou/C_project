@@ -20,7 +20,6 @@ int main()
         switch(i)
         {
             case 50: getPassword();
-                     pause();
                      index();
                      continue;
             case 49: User();

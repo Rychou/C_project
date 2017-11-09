@@ -31,7 +31,7 @@
 	<windows.h>
 	"../struct/struct.h"
 
-1510200125 source:h:\c语言\旅店管理系统\front\front.c
+1510203303 source:h:\c语言\旅店管理系统\front\front.c
 	<stdio.h>
 	<windows.h>
 	<ctype.h>
@@ -40,7 +40,7 @@
 	"../User/User.h"
 	"../User/time.h"
 
-1510200291 source:h:\c语言\旅店管理系统\user\user.c
+1510202953 source:h:\c语言\旅店管理系统\user\user.c
 	<stdio.h>
 	<windows.h>
 	"../struct/struct.h"

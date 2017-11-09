@@ -42,7 +42,7 @@ void User(){//输出用户界面
 void Reserve(){//输出预约界面
     system("cls");
     printf("\n");
-    printf(" @@@@@@@@@@@@@@前台@@@@@@@@@@@@@@@@@\n");
+    printf(" @@@@@@@@@@@@@@预约@@@@@@@@@@@@@@@@@\n");
     printf("@                                   @\n");
     printf("@      1.单人间（68元/天）          @\n");
     printf("@      2.双人间（168元/天）         @\n");
@@ -86,6 +86,10 @@ int isLeft(int i){//查询某种房型房间余量，输出用户可预定房号
     }
     printf("预订天数：");
     scanf("%d",&Day);
+    while(Day <= 0){
+        printf("请重输：");
+        scanf("%d",&Day);
+    }
     switch(i){
         case 1:
             for(k=0;k<3;k++)
@@ -243,6 +247,10 @@ void getRNum(){//在isLeft（）打印出可预定房号后 获取用户指令
 void getGNum(){//获取预定某房间的人数
     printf("请输入人数:");
     scanf("%d",&gNum);
+    while(gNum <= 0){
+        printf("请重输：");
+        scanf("%d",&gNum);
+    }
     printf("\n");
 }
 

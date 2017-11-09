@@ -90,20 +90,16 @@ void front(){//前台功能函数
             case 49:
                 printf("\n");
                 checkIn();
-                pause();
                 front_index();
                 continue;
             case 50:
                 printf("\n");
                 checkOut();
-                pause();
                 front_index();
                 continue;
             case 51:
                 printf("\n");
                 search();
-                printf("查询");
-                pause();
                 front_index();
                 continue;
         }
@@ -138,7 +134,7 @@ void checkIn(){//入住功能函数
     printf("请输入指令:");
     int k;
     scanf("%d",&k);
-    while(k!=1&&k!=2&&k!=3)
+    while(k!=1&&k!=2&&k!=3&&k!=4)
     {
         printf("输入错误，请重输：");
         scanf("%d",&k);
@@ -230,6 +226,10 @@ int front_isLeft(int i){//查询某种房型房间余量，输出可选择房号
     int j = 0;
     printf("入住天数：");
     scanf("%d",&Day);
+    while(Day <= 0){
+        printf("请重输：");
+        scanf("%d",&Day);
+    }
     switch(i){
     case 2:
         for(k=0;k<3;k++)
@@ -451,6 +451,7 @@ void searchAllRoom(){//查询所有房间
             printf("%d为空\n",room[i].num);
         }
     }
+    pause();
 }
 
 void searchOneRoom(){//查询一个房间具体信息
@@ -489,5 +490,5 @@ void searchOneRoom(){//查询一个房间具体信息
         printf("此房间为空房！\n");
     }
     printf("\n");
-
+    pause();
 }
