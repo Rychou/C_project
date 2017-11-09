@@ -31,35 +31,42 @@
 	<windows.h>
 	"../struct/struct.h"
 
-1509623291 source:h:\c语言\旅店管理系统\front\front.c
+1510157919 source:h:\c语言\旅店管理系统\front\front.c
+	<stdio.h>
+	<windows.h>
+	<ctype.h>
+	"../struct/struct.h"
+	"../User/User.h"
+	"../User/time.h"
 
-1509623181 source:h:\c语言\旅店管理系统\user\user.c
+1510191460 source:h:\c语言\旅店管理系统\user\user.c
 	<stdio.h>
 	<windows.h>
 	"../struct/struct.h"
 	"time.h"
 
-1509623257 source:h:\c语言\旅店管理系统\main.c
+1510155802 source:h:\c语言\旅店管理系统\main.c
 	<stdio.h>
 	<stdlib.h>
 	<windows.h>
 	"./User/User.h"
 	"./Front/Front.h"
 	"./struct/struct.h"
+	"./User/time.h"
 
-1509606702 h:\c语言\旅店管理系统\user\user.h
+1510155484 h:\c语言\旅店管理系统\user\user.h
 	"../struct/struct.h"
 
-1509622920 h:\c语言\旅店管理系统\front\front.h
+1510151233 h:\c语言\旅店管理系统\front\front.h
 
 1509516632 c:\代码\c\c_project\struct\struct.h
 
-1509600707 h:\c语言\旅店管理系统\struct\struct.h
+1510039859 h:\c语言\旅店管理系统\struct\struct.h
 
-1509600707 source:h:\c语言\旅店管理系统\user\time.c
+1510122392 source:h:\c语言\旅店管理系统\user\time.c
 	<time.h>
 	"User.h"
 	"../struct/struct.h"
 
-1509600707 h:\c语言\旅店管理系统\user\time.h
+1510053608 h:\c语言\旅店管理系统\user\time.h
 

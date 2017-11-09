@@ -59,3 +59,51 @@ int MonthHas(int year,int month)//判断一个月有几天
     }
 }
 
+Date getLastDt(Date first,int day){//得到最后一天
+    Date last = first;
+    int monthday = MonthHas(first.year,first.month);//这个月有几天
+    if(first.day+day > monthday){
+        if(first.month == 12){
+            last.year++;
+            int leftday = last.day+day-monthday;
+            int i = 1;
+            while(1){
+                int tempday = MonthHas(last.year,i);
+                if(tempday < leftday){
+                    leftday -= tempday;
+                    last.month = i+1;
+                }else{
+                    last.day = leftday;
+                    break;
+                }
+                i++;
+                if(i==13){
+                    last.year++;
+                    i=1;
+                }
+            }
+        }else {
+            last.month++;
+            last.day += day - monthday;
+        }
+    }else{
+        last.day += day;
+    }
+    return last;
+}
+
+int bigger(Date d1,Date d2){//比较两个日期的大小
+    if(d1.year > d2.year){
+        return 1;
+    }
+    if(d1.year == d2.year){
+        if(d1.month == d2.month){
+            if(d1.day > d2.day){
+                return 1;
+            }
+        }else if(d1.month > d2.month){
+            return 1;
+        }
+    }
+    return 0;
+}

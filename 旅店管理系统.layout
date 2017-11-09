@@ -2,52 +2,56 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Debug" />
-	<File name="User\User.c" open="1" top="1" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="Front\Front.h" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="7299" topLine="157" />
-		</Cursor>
-		<Folding>
-			<Collapse line="114" />
-			<Collapse line="174" />
-			<Collapse line="192" />
-			<Collapse line="257" />
-			<Collapse line="271" />
-			<Collapse line="348" />
-		</Folding>
-	</File>
-	<File name="User\time.h" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="148" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="main.c" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="593" topLine="10" />
-		</Cursor>
-	</File>
-	<File name="User\User.h" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="313" topLine="1" />
+			<Cursor1 position="311" topLine="0" />
 		</Cursor>
 	</File>
 	<File name="struct\struct.h" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="629" topLine="16" />
+			<Cursor1 position="638" topLine="16" />
+		</Cursor>
+	</File>
+	<File name="User\time.h" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="204" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="User\User.c" open="1" top="1" tabpos="6" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="3877" topLine="75" />
+		</Cursor>
+		<Folding>
+			<Collapse line="16" />
+			<Collapse line="37" />
+			<Collapse line="246" />
+			<Collapse line="282" />
+			<Collapse line="296" />
+			<Collapse line="313" />
+			<Collapse line="330" />
+		</Folding>
+	</File>
+	<File name="User\time.c" open="1" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2676" topLine="0" />
 		</Cursor>
 	</File>
 	<File name="Front\Front.c" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="0" topLine="0" />
+			<Cursor1 position="4222" topLine="279" />
+		</Cursor>
+		<Folding>
+			<Collapse line="212" />
+		</Folding>
+	</File>
+	<File name="User\User.h" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="468" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="Front\Front.h" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="main.c" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="0" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="User\time.c" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1532" topLine="0" />
+			<Cursor1 position="982" topLine="18" />
 		</Cursor>
 	</File>
 </CodeBlocks_layout_file>

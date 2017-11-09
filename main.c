@@ -4,7 +4,9 @@
 #include "./User/User.h"
 #include "./Front/Front.h"
 #include "./struct/struct.h"
+#include "./User/time.h"
 
+Date now;
 
 int main()
 {
@@ -12,7 +14,9 @@ int main()
     int i=0;
     index();
     while((i=getch())!= 0x1B){
+        now = getDt();
         readRoom();
+        readGuest();
         switch(i)
         {
             case 50: getPassword();
