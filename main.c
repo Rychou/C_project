@@ -2,12 +2,14 @@
 #include <stdlib.h>
 #include "./User/User.h"
 #include "./Front/Front.h"
+#include "./struct/struct.h"
 
 int main()
 {
     void index();
-    int i;
     index();
+    readRoom();
+    int i;
     scanf("%d",&i);
     while(i!=1&&i!=2)
     {
@@ -16,10 +18,10 @@ int main()
     }
     switch(i)
     {
-     //   case 2: getPassword();break;
-        case 1: index2();break;
+        case 2: getPassword();break;
+        case 1: User();break;
     }
-
+    writeGuest();
     return 0;
 }
 
@@ -31,3 +33,5 @@ void index()
     printf("=======================================\n");
     printf("«Î—°‘Ò£∫");
 }
+
+
